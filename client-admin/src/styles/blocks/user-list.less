@@ -1,0 +1,37 @@
+// main: "../main.less"
+
+.user_list {
+  position: relative;
+  height: 100%;
+}
+
+.user_list_content_item {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eeeeee;
+  align-items: center;
+  & img {
+    cursor: pointer;
+  }
+}
+
+.pagination {
+  position: absolute;
+  bottom: 0;
+  .pagination_button {
+    // align-self: end;
+    background: #eeeeee;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  .pagination_button_active {
+    background: #fce000;
+    color: #000;
+  }
+}
