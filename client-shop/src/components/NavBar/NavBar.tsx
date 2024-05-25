@@ -18,6 +18,9 @@ const NavBar: React.FC = () => {
         <NavLink to="product" className="nav_bar_link">
           Добавить товары
         </NavLink>
+        <NavLink to="del-product" className="nav_bar_link">
+          Удаление товаров
+        </NavLink>
       </nav>
     </div>
   );

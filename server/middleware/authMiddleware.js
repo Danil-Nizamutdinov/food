@@ -3,13 +3,15 @@ const jwt = require("jsonwebtoken");
 module.exports = function (req, res, next) {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    if (!token) {
-      res.json({ message: "не авторизован" });
+    console.log(typeof req.headers.authorization);
+
+    if (token === "null") {
+      return res.json({ message: null });
     }
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     req.user = decoded;
     next();
   } catch (e) {
-    res.json({ message: "что то пошло не так" });
+    return res.json({ message: "что то пошло не так" });
   }
 };

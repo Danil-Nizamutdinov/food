@@ -1,22 +1,15 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { setUser } from "../../store/reducers/ActionCreators";
+import Input from "../Input";
+import ErrorForm from "../ErrorForm";
 
 const Login: React.FC = () => {
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const error = useAppSelector((state) => state.userReducer.error);
 
   const dispatch = useAppDispatch();
-
-  const updateLogin = (e: ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
-    setLogin(text);
-  };
-
-  const updatePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
-    setPassword(text);
-  };
 
   const handleButton = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,17 +20,18 @@ const Login: React.FC = () => {
     <div className="login">
       <h2 className="login_title">Вход</h2>
       <form className="login_form" onSubmit={handleButton}>
-        <input
-          type="text"
+        <ErrorForm error={error} />
+        <Input
           value={login}
-          onChange={updateLogin}
+          setValue={setLogin}
           placeholder="Login"
+          type="Login"
         />
-        <input
-          type="password"
+        <Input
           value={password}
-          onChange={updatePassword}
+          setValue={setPassword}
           placeholder="Password"
+          type="password"
         />
         <button>Войти</button>
       </form>

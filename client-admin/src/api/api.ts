@@ -5,6 +5,9 @@ const instans = axios.create({
   baseURL: "http://localhost:5000/api/",
 });
 
+// Желательно пересмотреть весь этот код
+// и сделать его более читабельным + убрать отсюда лишнюю логику
+
 export const userAPI = {
   async login(email: string, password: string) {
     try {

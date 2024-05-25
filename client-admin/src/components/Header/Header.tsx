@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { signOut } from "../../store/reducers/UserSlice";
 
 const Header = () => {
-  const { isAuth } = useAppSelector((state) => state.userReducer);
+  const isAuth = useAppSelector((state) => state.userReducer.isAuth);
   const dispatch = useAppDispatch();
 
   const handleButton = () => {

@@ -23,6 +23,23 @@ class CategoryController {
     const category = await Category.findAll({ where: { userId } });
     return res.json(category);
   }
+  async delete(req, res) {
+    try {
+      const { userId, categoryId } = req.query;
+      console.log("----------", userId, "--------------");
+      console.log("----------", categoryId, "--------------");
+
+      const category = await Category.findOne({
+        where: { userId, id: categoryId },
+      });
+      await category.destroy();
+
+      const categorys = await Category.findAll({ where: { userId } });
+      return res.json(categorys);
+    } catch (error) {
+      return res.status(404).json({ message: "что пошло не так" });
+    }
+  }
 }
 
 module.exports = new CategoryController();

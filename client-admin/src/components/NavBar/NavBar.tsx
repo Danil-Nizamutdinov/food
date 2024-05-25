@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NavBar: React.FC = () => {
-  const isAuth: boolean = true;
   return (
     <div className="nav_bar">
       <h2 className="nav_bar_title">Меню</h2>

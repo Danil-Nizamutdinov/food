@@ -1,48 +1,51 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { UserState } from "../../types/user";
+import { UserState } from "../../types/main";
 import { setUser, checkUser } from "./ActionCreators";
 
 const initialState: UserState = {
-  users: [],
   user: {},
-  totalPages: 0,
   isLoading: false,
   isAuth: localStorage.getItem("token") ? true : false,
-  error: "",
-  currentPage: 1,
-  limit: 9,
+  error: null,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    // increment(state, action: PayloadAction<number>) {
-    //   state.count += action.payload;
-    // },
     signOut(state) {
       state.isAuth = false;
       localStorage.removeItem("token");
     },
-    setUsers(state, action) {
-      state.users = action.payload.users;
-      state.totalPages = action.payload.totalPages;
-    },
-    setCurrentPage(state, action) {
-      state.currentPage = action.payload;
-    },
   },
   extraReducers: (builder) => {
+    builder.addCase(setUser.pending, (state) => {
+      state.isLoading = true;
+    });
     builder.addCase(setUser.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.isAuth = action.payload.email ? true : false;
+      if (!action.payload.email) {
+        state.error = action.payload.message;
+      } else {
+        state.user = action.payload;
+        state.isAuth = action.payload.email ? true : false;
+      }
+
+      state.isLoading = false;
+    });
+    builder.addCase(checkUser.pending, (state) => {
+      state.isLoading = true;
     });
     builder.addCase(checkUser.fulfilled, (state, action) => {
-      state.user = action.payload;
+      if (!action.payload.email) {
+        state.error = action.payload.message;
+      } else {
+        state.user = action.payload;
+      }
+      state.isLoading = false;
     });
   },
 });
 
-export const { signOut, setCurrentPage } = userSlice.actions;
+export const { signOut } = userSlice.actions;
 
 export default userSlice.reducer;

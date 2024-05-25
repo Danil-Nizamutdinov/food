@@ -5,7 +5,7 @@ const checkRoleMiddleware = require("../middleware/checkRoleMiddleware");
 
 router.post(
   "/createUser",
-  checkRoleMiddleware("admin"),
+  // checkRoleMiddleware("admin"),
   adminController.registration
 );
 router.delete(

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { userAPI } from "../../api/api";
 import { AppDispatch, RootState } from "../store";
-import { userSlice } from "./UserSlice";
+import { setUsers, pending } from "./UserListSlice";
 
 interface Data {
   email: string;
@@ -19,10 +19,11 @@ interface DataUs {
   limit?: number;
 }
 
-export const setUsers = (data: DataUs) => async (dispatch: AppDispatch) => {
+export const getUsers = (data: DataUs) => async (dispatch: AppDispatch) => {
+  dispatch(pending());
   const { page, limit } = data;
   const res = await userAPI.getUsers(limit, page);
-  dispatch(userSlice.actions.setUsers(res));
+  dispatch(setUsers(res));
 };
 
 export const setUser = createAsyncThunk("user/setUser", async (data: Data) => {
@@ -34,7 +35,6 @@ export const setUser = createAsyncThunk("user/setUser", async (data: Data) => {
 export const createUser = (data: DataU) => async (dispatch: AppDispatch) => {
   const { email, password, role } = data;
   await userAPI.registration(email, password, role);
-  dispatch(setUsers({ page: 1, limit: 9 }));
 };
 
 export const deleteUser =
@@ -42,8 +42,8 @@ export const deleteUser =
   async (dispatch: AppDispatch, getState: () => RootState) => {
     await userAPI.deleteUser(userId);
     const state = getState();
-    const currentPage = state.userReducer.currentPage;
-    dispatch(setUsers({ page: currentPage, limit: 9 }));
+    const currentPage = state.userListReducer.currentPage;
+    dispatch(getUsers({ page: currentPage, limit: 9 }));
   };
 
 export const checkUser = createAsyncThunk("user/checkUser", async () => {

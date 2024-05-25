@@ -1,0 +1,43 @@
+// main: "../main.less"
+
+.modal_card {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.1s;
+
+  &_active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 1;
+  }
+}
+
+.popup_card {
+  position: relative;
+  width: 35%;
+  margin: 0 auto;
+  margin-top: 150px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.card_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  & img {
+    cursor: pointer;
+  }
+}
+
+.card_input_box {
+  display: flex;
+  justify-content: space-between;
+}

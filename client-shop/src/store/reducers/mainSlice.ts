@@ -6,6 +6,9 @@ const initialState: MainState = {
   user: null,
   userInfo: null,
   category: null,
+  userItem: null,
+  categoryId: null,
+  userItems: { message: "тут пусто" },
   isAuth: localStorage.getItem("token") ? true : false,
 };
 
@@ -26,6 +29,15 @@ export const mainSlice = createSlice({
     setCategory(state, action) {
       state.category = action.payload;
     },
+    setUserItem(state, action) {
+      state.userItem = action.payload;
+    },
+    setUserItems(state, action) {
+      state.userItems = action.payload;
+    },
+    setCurrentCategoryId(state, action) {
+      state.categoryId = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(setUser.fulfilled, (state, action) => {
@@ -38,6 +50,13 @@ export const mainSlice = createSlice({
   },
 });
 
-export const { signOut, setUserInfo, setCategory } = mainSlice.actions;
+export const {
+  signOut,
+  setUserInfo,
+  setCategory,
+  setUserItem,
+  setUserItems,
+  setCurrentCategoryId,
+} = mainSlice.actions;
 
 export default mainSlice.reducer;

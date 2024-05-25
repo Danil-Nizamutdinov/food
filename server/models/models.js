@@ -11,6 +11,7 @@ const User = sequelize.define("user", {
 const UserInfo = sequelize.define("user_info", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, allowNull: true },
+  role: { type: DataTypes.STRING, allowNull: true },
   img: { type: DataTypes.STRING, allowNull: true },
 });
 

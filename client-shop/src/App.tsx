@@ -10,6 +10,7 @@ import Name from "./components/Name/Name";
 import Logo from "./components/Logo/Logo";
 import Category from "./components/Category/Category";
 import Product from "./components/Product/Product";
+import DelProduct from "./components/DelProduct/DelProduct";
 
 const App: React.FC = () => {
   const { isAuth, user } = useAppSelector((state) => state.mainReducer);
@@ -38,6 +39,7 @@ const App: React.FC = () => {
           <Route path="logo" element={<Logo />} />
           <Route path="category" element={<Category />} />
           <Route path="product" element={<Product />} />
+          <Route path="del-product" element={<DelProduct />} />
         </Routes>
       </div>
     </div>

@@ -207,3 +207,9 @@ body {
   padding-left: 58px;
   min-height: 600px;
 }
+.error_form {
+  font-size: 14px;
+  color: #797979ee;
+  font-weight: 500;
+  margin-left: 10px;
+}

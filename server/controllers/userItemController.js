@@ -7,7 +7,7 @@ class UserItemController {
     try {
       const { name, price, weight, userId, categoryId } = req.body;
       const { img } = req.files;
-      let fileName = uuid.v4() + ".jpg";
+      let fileName = uuid.v4() + ".png";
       img.mv(path.resolve(__dirname, "..", "static", fileName));
 
       const userItem = await UserItem.create({
@@ -66,6 +66,21 @@ class UserItemController {
     });
 
     return res.json(userItem);
+  }
+
+  async getLastUserItem(req, res) {
+    try {
+      const { userId } = req.query;
+
+      const lastUserItem = await UserItem.findOne({
+        where: { userId: userId },
+        order: [["createdAt", "DESC"]],
+      });
+
+      return res.json(lastUserItem);
+    } catch (error) {
+      return res.status(123).json({ message: "error" });
+    }
   }
 }
 

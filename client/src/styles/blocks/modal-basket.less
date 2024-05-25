@@ -1,0 +1,156 @@
+// main: "../main.less"
+
+.modal_basket {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.1s;
+
+  &_active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 1;
+  }
+}
+
+.popup_basket {
+  position: absolute;
+  height: 100%;
+  width: 25%;
+  background-color: #fff;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 10fr 2fr;
+  right: -50%;
+  top: 0;
+  transition: 0.5s;
+
+  &_active {
+    right: 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.popup_basket_close {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.popup_basket_scroll {
+  min-height: 85%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0px 30px;
+}
+
+.popup_basket_title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.popup_basket_info_content {
+  position: relative;
+  margin: 30px 0px;
+}
+
+.popup_basket_info {
+  display: flex;
+  border-bottom: 1px solid #d9d9d9;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.popup_basket_info_img {
+  width: 60px;
+  height: 60px;
+}
+
+.popup_basket_info_text {
+  margin-left: 15px;
+  & h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  & p {
+    font-size: 12px;
+    color: rgb(92, 99, 112);
+  }
+}
+
+.popup_basket_price_content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.popup_basket_price {
+  font-size: 16px;
+}
+
+.popup_basket_add {
+  display: flex;
+  align-items: center;
+  & button {
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 25px;
+  }
+}
+
+.del_pizza {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  & img {
+    width: 20px;
+  }
+}
+
+.popup_basket_footer_content {
+  padding: 30px 15px;
+
+  & button {
+    box-sizing: border-box;
+    padding: 15px 0px;
+    width: 100%;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #fce000;
+    cursor: pointer;
+    transition: 0.2s all;
+  }
+  & button:hover {
+    background-color: #ffe839;
+  }
+}
+
+.popup_basket_footer_info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}

@@ -1,64 +1,60 @@
 import React, { useState } from "react";
 import { createUser } from "../../store/reducers/ActionCreators";
 import { useAppDispatch } from "../../hooks/redux";
+import Input from "../Input";
+import InputRadio from "../InputRadio";
+import ErrorForm from "../ErrorForm";
+
+const items: { value: string; label: string }[] = [
+  { value: "shop", label: "shop" },
+  { value: "admin", label: "admin" },
+];
 
 const AddUser: React.FC = () => {
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [password2, setPassword2] = useState<string>("");
+  const [copyPassword, setCopyPassword] = useState<string>("");
   const [value, setValue] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
 
   const dispatch = useAppDispatch();
 
-  const items: { value: string; label: string }[] = [
-    { value: "shop", label: "shop" },
-    { value: "admin", label: "admin" },
-  ];
-
   const handleButton = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!value || password === "" || login === "") {
+      return setError("не все поля заполнены");
+    }
+    if (password !== copyPassword) {
+      return setError("пароли не совпадают");
+    }
     dispatch(createUser({ email: login, password, role: value }));
+    alert("пользователь добавлен");
   };
 
   return (
     <div className="add_user">
       <h2>Добавит пользователя</h2>
       <form className="add_user_form" onSubmit={handleButton}>
-        <input
-          type="text"
+        <Input
           value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          setValue={setLogin}
           placeholder="Login"
-          className="input_text"
+          type="text"
         />
-        <input
-          type="password"
+        <Input
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          setValue={setPassword}
           placeholder="Password"
-          className="input_text"
-        />
-        <input
           type="password"
-          value={password2}
-          onChange={(e) => setPassword2(e.target.value)}
-          placeholder="Password"
-          className="input_text"
         />
-        <div className="input_box_radio">
-          {items.map((i) => (
-            <div key={i.value}>
-              <input
-                type="radio"
-                value={i.value}
-                id={i.value}
-                checked={value === i.value}
-                onChange={(e) => setValue(e.target.value)}
-              />{" "}
-              <label htmlFor={i.value}>{i.label}</label>
-            </div>
-          ))}
-        </div>
+        <Input
+          value={copyPassword}
+          setValue={setCopyPassword}
+          placeholder="Password"
+          type="password"
+        />
+        <InputRadio items={items} value={value} setValue={setValue} />
+        <ErrorForm error={error} />
         <button>Создать</button>
       </form>
     </div>

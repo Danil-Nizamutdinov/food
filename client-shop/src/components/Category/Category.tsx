@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
   createCategory,
+  deleteCategory,
   getCategory,
 } from "../../store/reducers/ActionCreators";
 import del from "../../assets/close.svg";
@@ -19,6 +20,7 @@ const Category = () => {
   const handleButton = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(createCategory(user.id, name));
+    setName("");
   };
 
   return (
@@ -28,7 +30,7 @@ const Category = () => {
         {category?.map((c: { id: number; name: string; userId: number }) => (
           <div key={c.id} className="category_list_content_item">
             <div>{c.name}</div>
-            <div>
+            <div onClick={() => dispatch(deleteCategory(user.id, c.id))}>
               <img src={del} alt="delete" />
             </div>
           </div>

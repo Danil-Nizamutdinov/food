@@ -1,0 +1,21 @@
+// main: "../main.less"
+
+.nav_bar_link {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  font-size: 16px;
+  color: #000;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px; /* Расстояние подчеркивания от текста */
+  width: 50%;
+  height: 2px; /* Толщина подчеркивания */
+  background-color: #fce000; /* Цвет подчеркивания */
+}
